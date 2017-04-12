@@ -1,0 +1,34 @@
+---
+spring:
+  profiles: development
+  messages:
+    basename: locale/messages
+    cache-seconds: -1
+    encoding: UTF-8
+  thymeleaf:
+    cache: false
+  datasource:
+    dataSourceClassName: org.h2.jdbcx.JdbcDataSource
+    url: jdbc:h2:mem:ngpos;MODE=MYSQL;DB_CLOSE_DELAY=-1
+    databaseName: ordersdb
+    username:
+    password:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: H2
+    openInView: true
+    show_sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: true
+      hibernate.hbm2ddl.auto: validate
+
+logging:
+  file: /tmp/orderservice
