@@ -2,11 +2,9 @@ package com.nisum.springboot.liquibase;
 
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.rule.OutputCapture;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.core.NestedCheckedException;
+
 import java.net.ConnectException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,13 +32,8 @@ public class SpringBootliquibaseApplicationTests {
 				.contains("Creating database history "
 						+ "table with name: PUBLIC.DATABASECHANGELOG")
 				.contains("Table Employee created")
-//				.contains("ChangeSet classpath:/db/"
-//						+ "changelog/db.changelog-master.xml::1::"
-//						+ "marceloverdijk ran successfully")
-//				.contains("New row inserted into person")
-//				.contains("ChangeSet classpath:/db/changelog/"
-//						+ "db.changelog-master.yaml::2::"
-//						+ "marceloverdijk ran successfully")
+				.contains("classpath:db/changelog/db.changelog-master.xml:")
+				.contains("New row inserted into person")
 				.contains("Successfully released change log lock");
 	}
 

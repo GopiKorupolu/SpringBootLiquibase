@@ -29,8 +29,5 @@
         <addPrimaryKey columnNames="EmployeeId"
                        constraintName="pk_employee"
                        tableName="Employee" />
-
-        <rollback changeSetId="create_employee_table" changeSetAuthor="Gopi"/>
     </changeSet>
-
 </databaseChangeLog>

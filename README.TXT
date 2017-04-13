@@ -96,5 +96,40 @@ To automatically run Liquibase database migrations on startup, add the org.liqui
 The master change log is by default read from db/changelog/db.changelog-master.yaml but can be set using liquibase.change-log. In addition to YAML, Liquibase also supports JSON, XML, and SQL change log formats.
 By default Liquibase will autowire the (@Primary) DataSource in your context and use that for migrations. If you like to use a different DataSource you can create one and mark its @Bean as @LiquibaseDataSource - if you do that remember to create another one and mark it as @Primary if you want two data sources. Or you can use Liquibase’s native DataSource by setting liquibase.[url,user,password] in external properties.
 
+RunLiquibase from command prompt :
 
+
+Run liquibase :
+
+
+java -jar liquibase.jar --driver=com.mysql.jdbc.Driver --classpath=/Users/gopikorupolu/mysql-connector-java-5.0.8-bin.jar  --changeLogFile=/Users/gopikorupolu/nisum-poc/SpringBootLiquibase/src/main/resources/db/changelog/db.changelog-master.xml --url=jdbc:mysql://localhost:3306/nisumliquibase --username=nisumuser --password=password123 update
+
+
+Rollback :
+
+
+Rollback to version:
+
+
+ java -jar liquibase.jar --driver=com.mysql.jdbc.Driver --classpath=/Users/gopikorupolu/mysql-connector-java-5.0.8-bin.jar  --changeLogFile=/Users/gopikorupolu/nisum-poc/SpringBootLiquibase/src/main/resources/db/changelog/db.changelog-master.xml --url=jdbc:mysql://localhost:3306/nisumliquibase --username=nisumuser --password=password123 rollback version_0.1.0
+
+
+
+
+
+Rollback to Date :
+
+
+java -jar liquibase.jar --driver=com.mysql.jdbc.Driver --classpath=/Users/gopikorupolu/mysql-connector-java-5.0.8-bin.jar  --changeLogFile=/Users/gopikorupolu/nisum-poc/SpringBootLiquibase/src/main/resources/db/changelog/db.changelog-master.xml --url=jdbc:mysql://localhost:3306/nisumliquibase --username=nisumuser --password=password123 rollbackToDate "2017-04-13 09:47:19”
+
+
+Sql Scripts:
+
+Rollforward :
+
+java -jar liquibase.jar --driver=com.mysql.jdbc.Driver --classpath=/Users/gopikorupolu/mysql-connector-java-5.0.8-bin.jar  --changeLogFile=/Users/gopikorupolu/nisum-poc/SpringBootLiquibase/src/main/resources/db/changelog/db.changelog-master.xml --url=jdbc:mysql://localhost:3306/nisumliquibase --username=nisumuser --password=password123 updateSQL > /tmp/rollforwardscript.sql
+
+RollBack Sql Script:
+
+java -jar liquibase.jar --driver=com.mysql.jdbc.Driver --classpath=/Users/gopikorupolu/mysql-connector-java-5.0.8-bin.jar  --changeLogFile=/Users/gopikorupolu/nisum-poc/SpringBootLiquibase/src/main/resources/db/changelog/db.changelog-master.xml --url=jdbc:mysql://localhost:3306/nisumliquibase --username=nisumuser --password=password123 rollbackSQL version_0.1.0 > /tmp/rollbackscript.sql
 

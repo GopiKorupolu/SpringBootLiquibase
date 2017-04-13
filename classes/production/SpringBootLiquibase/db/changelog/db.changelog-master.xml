@@ -7,15 +7,8 @@
    http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <include file="db.changelog-1.0.xml" relativeToChangelogFile="true"/>
+    <include file="/db/changelog/db.changelog-1.0.xml"/>
     <include file="changelog-create-employee-table.xml" relativeToChangelogFile="true"/>
-
-    <!-- Also include the tagging itself as a changeSet... -->
-    <changeSet author="Gopi" id="tag_version_0_1_0">
-        <tagDatabase tag="version_0.1.0" />
-    </changeSet>
-    <!-- version 0.1.0 ends here -->
-
     <include file="changelog-add-employee-data.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

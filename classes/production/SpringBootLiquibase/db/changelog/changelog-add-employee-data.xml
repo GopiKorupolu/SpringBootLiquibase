@@ -1,0 +1,38 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="add_employee_data" author="Gopi">
+        <insert tableName="Employee">
+            <column name="EmployeeId" type="BIGINT" valueNumeric="10001"/>
+            <column name="FirstName">Gopi</column>
+            <column name="LastName">Korupolu</column>
+            <column name="Phone">+47 32324324</column>
+            <column name="JoiningDate" valueDate="2004-06-09"/>
+        </insert>
+        <insert tableName="Employee">
+            <column name="EmployeeId" type="BIGINT" valueNumeric="10002"/>
+            <column name="FirstName">Test</column>
+            <column name="LastName">User</column>
+            <column name="Phone">+91 9834249399</column>
+            <column name="JoiningDate" valueDate="2004-05-11"/>
+        </insert>
+        <insert tableName="Employee">
+            <column name="EmployeeId" type="BIGINT" valueNumeric="10003"/>
+            <column name="FirstName">Test</column>
+            <column name="LastName">Uer2</column>
+            <column name="Phone">+91 8342342345</column>
+            <column name="JoiningDate" valueDate="2004-07-07"/>
+        </insert>
+        <rollback>
+            <sql>
+                delete from Employee
+                where EmployeeId in (10001, 10002, 10003)
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

@@ -11,71 +11,10 @@ buildscript {
 		//liquibase gradle plugin
 
 		classpath "org.liquibase:liquibase-gradle-plugin:1.2.4"
+		classpath 'mysql:mysql-connector-java:5.1.36'
 
 	}
 }
-
-liquibase {
-	activities {
-		update {
-			changeLogFile project.changeLogFile
-			url 'offline:mysql'
-			outputFile project.updateOutputFile
-		}
-		rollback {
-			changeLogFile project.changeLogFile
-			url 'offline:mysql'
-			outputFile project.rollbackOutputFile
-		}
-	}
-	runList = 'update,rollback'
-}
-
-
-project.ext {
-	changeLogFile = 'SpringBootliquibase/src/main/resources/db/changelog/db.changelog-master.yaml'
-	updateOutputFile = 'SpringBootliquibase/src/main/resources/db/changelog/scripts/update-changeSets.sql'
-	rollbackOutputFile = 'SpringBootliquibase/src/main/resources/db/changelog/scripts/rollback-changeSets.sql'
-}
-
-task liquibaseSQLs << {
-	println 'snapintegration-liquibase: Liquibase update and rollback files generated successfully'
-	println 'snapintegration-liquibase: Update file location = \'' + updateOutputFile + '\''
-	println 'snapintegration-liquibase: Rollback file location = \'' + rollbackOutputFile + '\''
-}
-
-liquibase {
-	activities {
-		update {
-			changeLogFile project.changeLogFile
-			url 'offline:mysql'
-			outputFile project.updateOutputFile
-		}
-		rollback {
-			changeLogFile project.changeLogFile
-			url 'offline:mysql'
-			outputFile project.rollbackOutputFile
-		}
-	}
-	runList = 'update,rollback'
-}
-
-updateSQL.doFirst {
-	println 'snapintegration-liquibase: Generating liquibase update and rollback SQL files for the changelog \'' + project.changeLogFile + '\''
-	liquibase.runList = 'update'
-}
-
-rollbackCountSQL.doFirst {
-	project.ext {
-		// We want to generate the rollback for all the changes done so far, so we are telling liquibase
-		// to generate the SQLs for the last 5000000 changes
-		liquibaseCommandValue = "5000000"
-	}
-	liquibase.runList = 'rollback'
-}
-
-rollbackCountSQL.dependsOn updateSQL
-liquibaseSQLs.dependsOn rollbackCountSQL
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -100,7 +39,7 @@ dependencies {
 	testCompile group: 'org.liquibase', name: 'liquibase-core', version: '3.5.3'
 	//h2 and mysql jars
 	compile group: 'com.h2database', name: 'h2'
-	//compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
 
 	// tag::jetty[]
 	compile("org.springframework.boot:spring-boot-starter-web") {
